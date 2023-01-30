@@ -242,14 +242,14 @@ reference = "codeartifact"
 
 [[package]]
 name = "bump2version"
-version = "1.0.1"
+version = "1.0.2b4"
 description = "Version-bump your software with a single command!"
 category = "dev"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.8,<3.12.0"
 files = [
-    {file = "bump2version-1.0.1-py2.py3-none-any.whl", hash = "sha256:37f927ea17cde7ae2d7baf832f8e80ce3777624554a653006c9144f8017fe410"},
-    {file = "bump2version-1.0.1.tar.gz", hash = "sha256:762cb2bfad61f4ec8e2bdf452c7c267416f8c70dd9ecb1653fd0bbb01fa936e6"},
+    {file = "bump2version-1.0.2b4-py3-none-any.whl", hash = "sha256:8cc972cf716fdd5dd16d07f20c7194af9a1b575273c90a4aac9195775f01749b"},
+    {file = "bump2version-1.0.2b4.tar.gz", hash = "sha256:1e447a3b0776d94d37efcc7cda6daa8fd290deb1917e274c1cfd1cdb3711b736"},
 ]
 
 [package.source]
@@ -2429,18 +2429,18 @@ reference = "codeartifact"
 
 [[package]]
 name = "poetry-plugin-bump2version"
-version = "0.8.2"
+version = "0.9.0"
 description = "Poetry plugin to update version in files using bump2version"
 category = "dev"
 optional = false
 python-versions = ">=3.8,<3.12.0"
 files = [
-    {file = "poetry_plugin_bump2version-0.8.2-py3-none-any.whl", hash = "sha256:d30ce69afaa7d6b0c8907161b07ff50e23ef8a011cc44b3d1be52db1945cdc46"},
-    {file = "poetry_plugin_bump2version-0.8.2.tar.gz", hash = "sha256:93a1548efc135d580858030c59948bc13af84c9eef30d2887bd47db0506ab1f9"},
+    {file = "poetry_plugin_bump2version-0.9.0-py3-none-any.whl", hash = "sha256:6f2643d397ab3bbb648514703cea907dd4702737463862950eb66beb68152d28"},
+    {file = "poetry_plugin_bump2version-0.9.0.tar.gz", hash = "sha256:ba50e636e4ee95642c9fb0e54726feaff3da9b031cede0f36c58ee2392b5a859"},
 ]
 
 [package.dependencies]
-bump2version = ">=1.0.1,<1.1.0"
+bump2version = ">=1.0.2-beta4,<1.1.0"
 inflection = ">=0.5.1,<0.6.0"
 poetry = ">=1.3.1,<1.4.0"
 pydantic = ">=1.10.2,<1.11.0"
@@ -2605,7 +2605,7 @@ with-vulture = ["vulture (>=1.5)"]
 type = "git"
 url = "https://github.com/christokur/prospector.git"
 reference = "master"
-resolved_reference = "5e0a5a4bdaaa006810b365885f6dc0fbae4f13dc"
+resolved_reference = "7697dac8c3c8451d13546a7c4f1ce03bce08909d"
 
 [[package]]
 name = "ptyprocess"
@@ -4309,4 +4309,4 @@ reference = "codeartifact"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.12.0"
-content-hash = "ed54bab48b705b0051f4ba2dfcb4189aebdf9a874315a8a2010c442f3b0ccdf7"
+content-hash = "5c47a7d60e9f23740eccd0d45db046e9f7285671ae81b580f29a29521195290a"
