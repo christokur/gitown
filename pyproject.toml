@@ -54,12 +54,10 @@ Homepage = "https://github.com:SandsB2B/pre-commit-hook-gitown"
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.12.0"
-invoke = "~1.7.3"
-virtualenv = "~20.10.0"
 pre-commit = "~2.21.0"
+invoke = "~1.7.3"
 
 [tool.poetry.group.dev.dependencies]
-invoke = "1.7.3"
 radon = "5.1.0"
 pdbr = { version = "0.7.5", markers = "sys_platform != 'win32'" }
 inflection = "^0.5.1"
@@ -79,7 +77,7 @@ pytest = "~7.2.0"
 pytest-cov = "~4.0.0"
 poethepoet = "~0.15.0"
 coverage = { version = "~6.5.0", extras = ["toml"] }
-pre-commit = "~2.21.0"
+#pre-commit = "~2.21.0"
 pyproject-fmt = "~0.3.5"
 # https://githubplus.com/PyCQA/prospector/issues/539 1.7.7 with pylint>=2.15.7
 # We can either pin pylint or hope a newer prospector fixes the problem.
@@ -100,8 +98,8 @@ mkdocs-material = ">=8.1.4,<9.0.0"
 mdx-include = ">=1.4.1,<2.0.0"
 mkdocs-markdownextradata-plugin = ">=0.1.7,<0.3.0"
 poetry-plugin-bump2version = "~0.9.0"
-invoke = "~1.7.3"
-gitown = { git = "https://github.com/christokur/gitown.git", branch="master" }
+#invoke = "~1.7.3"
+#gitown = { git = "https://github.com/christokur/gitown.git", branch="master" }
 
 [tool.poetry_bump2version.options]
 list = true
