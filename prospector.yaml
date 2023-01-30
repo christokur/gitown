@@ -1,0 +1,31 @@
+output-format: pylint
+
+strictness: veryhigh
+test-warnings: true
+doc-warnings: false
+max-line-length: 120
+
+#inherits:
+#  - my/other/profile.yml
+
+ignore-paths:
+  - docs/
+  - debug
+  - tests/samples/unit/user_rules/import_exception/invalid_python.py
+  - tests
+
+#ignore-patterns:
+#  - (^|/)skip(this)?(/|$)
+
+pycodestyle:
+  disable:
+    - E203
+  options:
+    max-line-length: 120
+
+#mccabe:
+#  run: false
+
+#pyflakes:
+#  disable:
+#    - F841

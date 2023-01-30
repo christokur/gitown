@@ -5,4 +5,6 @@
 #
 # Order is important. The last matching pattern has the most precedence.
 
-.pre-commit-config.yaml @milin
+
+# This file is also being managed automatically by the gitown tool.
+* @christokur

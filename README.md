@@ -1,17 +1,4 @@
-======
-gitown
-======
-
-
-.. image:: https://img.shields.io/pypi/v/gitown.svg
-        :target: https://pypi.python.org/pypi/gitown
-
-.. image:: https://img.shields.io/travis/milin/gitown.svg
-        :target: https://travis-ci.com/milin/gitown
-
-.. image:: https://readthedocs.org/projects/gitown/badge/?version=latest
-        :target: https://gitown.readthedocs.io/en/latest/?badge=latest
-        :alt: Documentation Status
+# gitown v0.2.2
 
 
 Keep your github CODEOWNERS file up to date.

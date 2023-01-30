@@ -1,0 +1,15 @@
+--extra-index-url https://artifacts-433714148419.d.codeartifact.us-east-2.amazonaws.com/pypi/pypi/simple
+
+backports-entry-points-selectable==1.2.0 ; python_version >= "3.8" and python_full_version < "3.12.0"
+cfgv==3.3.1 ; python_version >= "3.8" and python_full_version < "3.12.0"
+distlib==0.3.6 ; python_version >= "3.8" and python_full_version < "3.12.0"
+filelock==3.9.0 ; python_version >= "3.8" and python_full_version < "3.12.0"
+identify==2.5.15 ; python_version >= "3.8" and python_full_version < "3.12.0"
+invoke==1.7.3 ; python_version >= "3.8" and python_full_version < "3.12.0"
+nodeenv==1.7.0 ; python_version >= "3.8" and python_full_version < "3.12.0"
+platformdirs==2.6.2 ; python_version >= "3.8" and python_full_version < "3.12.0"
+pre-commit==2.21.0 ; python_version >= "3.8" and python_full_version < "3.12.0"
+pyyaml==6.0 ; python_version >= "3.8" and python_full_version < "3.12.0"
+setuptools==66.1.1 ; python_version >= "3.8" and python_full_version < "3.12.0"
+six==1.16.0 ; python_version >= "3.8" and python_full_version < "3.12.0"
+virtualenv==20.10.0 ; python_version >= "3.8" and python_full_version < "3.12.0"
