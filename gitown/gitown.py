@@ -3,6 +3,7 @@ import csv
 import json
 import pathlib
 import sys
+import yaml
 from functools import lru_cache
 
 from invoke import run
@@ -45,10 +46,16 @@ class CodeOwnersUpdater:
     def check_files(self, files):
         codeowners_data = {}
         for file in files:
+            if self.verbose:
+                print(f"file: {file}")
             file_committers = self.get_committers_for_file(file)
+            if self.verbose:
+                print(f"committers: {file_committers}")
             # Some files may be not meet committer threshold, so we ignore those.
             if file_committers:
                 codeowners_data[file] = file_committers
+        if self.verbose:
+            print(f"codeowners data: {yaml.safe_dump(codeowners_data, indent=2)}")
         for key, value in self.original_codeowner_data.items():
             self.updated_codeowner_data[key] = codeowners_data.get(key, value)
         for key, value in codeowners_data.items():
