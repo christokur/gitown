@@ -86,8 +86,8 @@ class CodeOwnersUpdater:
                 for key, value in updated_data.items():
                     writer.writerow([key] + value)
             if self.verbose:
-                print(f"updated data: {updated_data}")
-                print(f"original data: {self.original_codeowner_data}")
+                print(f"updated data: {yaml.safe_dump(updated_data, indent=2)}")
+                print(f"original data: {yaml.safe_dump(self.original_codeowner_data, indent=2)}")
             self.updated = True
 
     def get_committer_line_frequency_percentage(self, committer_email, filename):
