@@ -21,7 +21,7 @@ class CodeOwnersUpdater:
         owners,
         ownership_threshold=DEFAULT_OWNERSHIP_THRESHOLD,
         codeowners_filename=DEFAULT_CODEOWNERS_FILE,
-        verbose=False,
+        verbose:int=0,
     ):
         self.files = files
         self.original_codeowner_data = {}
@@ -45,17 +45,19 @@ class CodeOwnersUpdater:
 
     def check_files(self, files):
         codeowners_data = {}
+        if self.verbose > 0:
+            print(f"files: {files}")
         for file in files:
-            if self.verbose:
+            if self.verbose > 2:
                 print(f"file: {file}")
             file_committers = self.get_committers_for_file(file)
-            if self.verbose:
-                print(f"committers: {file_committers}")
+            if self.verbose > 2:
+                print(f"{file} committers: {file_committers}")
             # Some files may be not meet committer threshold, so we ignore those.
             if file_committers:
                 codeowners_data[file] = file_committers
-        if self.verbose:
-            print(f"codeowners data: {yaml.safe_dump(codeowners_data, indent=2)}")
+        if self.verbose  > 1:
+            print(f"codeowners data:\n{yaml.safe_dump(codeowners_data, indent=2)}")
         for key, value in self.original_codeowner_data.items():
             self.updated_codeowner_data[key] = codeowners_data.get(key, value)
         for key, value in codeowners_data.items():
@@ -67,9 +69,22 @@ class CodeOwnersUpdater:
             if (key == "*" or value != self.updated_codeowner_data.get("*", None))
         }
 
+        if self.verbose > 1:
+            diff_data = {
+                key: value
+                for key, value in self.updated_codeowner_data.items()
+                if (
+                    not (v := self.optimized_codeowner_data.get(key, None))
+                    or value != v
+                )
+            }
+            print(f"optimized out:\n{yaml.safe_dump(diff_data, indent=2)}")
         self.update_file(self.optimized_codeowner_data)
 
     def update_file(self, updated_data):
+        print(f"verbose: {self.verbose}")
+        if self.verbose > 2:
+            print(f"original data: {yaml.safe_dump(self.original_codeowner_data, indent=2)}")
         if updated_data != self.original_codeowner_data:
             with open(self.codeowners_file, "w", newline="", encoding="utf-8") as csvfile:
                 csvfile.write("# Lines starting with '#' are comments.\n")
@@ -85,9 +100,18 @@ class CodeOwnersUpdater:
                 writer = csv.writer(csvfile, delimiter=" ", lineterminator="\n")
                 for key, value in updated_data.items():
                     writer.writerow([key] + value)
-            if self.verbose:
+            if self.verbose > 2:
                 print(f"updated data: {yaml.safe_dump(updated_data, indent=2)}")
-                print(f"original data: {yaml.safe_dump(self.original_codeowner_data, indent=2)}")
+            if self.verbose > 1:
+                diff_data = {
+                    key: value
+                    for key, value in updated_data.items()
+                    if (
+                        not (v := self.original_codeowner_data.get(key, None))
+                        or value != v
+                    )
+                }
+                print(f"difference:\n{yaml.safe_dump(diff_data, indent=2)}")
             self.updated = True
 
     def get_committer_line_frequency_percentage(self, committer_email, filename):
@@ -128,11 +152,12 @@ def main():
     parser.add_argument("--ownership_threshold")
     parser.add_argument("--codeowners_filename")
     parser.add_argument("--verbose", "-v", action="count", default=0)
+    parser.add_argument("--debug", "-d", action="store_true", default=False)
     args = parser.parse_args()
     files = args.filenames
     ownership_threshold = int(args.ownership_threshold or DEFAULT_OWNERSHIP_THRESHOLD)
     codeowners_filename = args.codeowners_filename
-    verbose = bool(args.verbose)
+    verbose = int(args.verbose)
 
     if len(files) == 0:
         parser.error("No filenames provided")
@@ -141,6 +166,7 @@ def main():
         owners = json.loads(owners_raw)
     except FileNotFoundError as e:
         message = "A .gitownrc file is required. Please see the github repo for details"
+        raise Exception(message).with_traceback(e.__traceback__)
         raise Exception(message).with_traceback(e.__traceback__)
 
     codeowners = CodeOwnersUpdater(
@@ -151,7 +177,9 @@ def main():
         verbose=verbose,
     )
     codeowners.main()
-
+    if bool(args.debug):
+        print(f"debug: {args.debug}")
+        raise Exception("debug")
 
 if __name__ == "__main__":
     sys.exit(main())
