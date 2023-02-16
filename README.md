@@ -1,4 +1,4 @@
-# gitown v0.2.4
+# gitown v0.2.5
 
 
 Keep your github CODEOWNERS file up to date.
