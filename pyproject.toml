@@ -6,7 +6,7 @@ requires = [
 
 [tool.poetry]
 name = "gitown"
-version = "0.2.3"
+version = "0.2.4"
 description = "Keep your github CODEOWNERS file up to date."
 authors = ["Christo De Lange <christo.delange@sands.com>", "Milind Shakya <sh.milind@gmail.com>"]
 readme = "README.md"
