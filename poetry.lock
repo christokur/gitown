@@ -2577,7 +2577,7 @@ flake8 = "<6.0.0"
 GitPython = "^3.1.27"
 mccabe = "^0.7.0"
 mypy = {version = ">=0.600", optional = true}
-packaging = "<22.0"
+packaging = "*"
 pep8-naming = ">=0.3.3,<=0.10.0"
 pycodestyle = ">=2.9.0"
 pydocstyle = ">=2.0.0"
@@ -2605,7 +2605,7 @@ with-vulture = ["vulture (>=1.5)"]
 type = "git"
 url = "https://github.com/christokur/prospector.git"
 reference = "master"
-resolved_reference = "7697dac8c3c8451d13546a7c4f1ce03bce08909d"
+resolved_reference = "1aedbe89634acfbae1e60c65ffeb874e461ed3da"
 
 [[package]]
 name = "ptyprocess"
@@ -4309,4 +4309,4 @@ reference = "codeartifact"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.12.0"
-content-hash = "5c47a7d60e9f23740eccd0d45db046e9f7285671ae81b580f29a29521195290a"
+content-hash = "b7ca581fe5a4408fe43f1ec0ece49320a744966b530f010a13fc0ae94439aafe"
