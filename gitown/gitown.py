@@ -7,6 +7,7 @@ import yaml
 from functools import lru_cache
 
 from invoke import run
+from pre_commit import git
 
 DEFAULT_CODEOWNERS_FILE = "CODEOWNERS"
 DEFAULT_OWNERSHIP_THRESHOLD = 25
@@ -45,7 +46,7 @@ class CodeOwnersUpdater:
 
     def check_files(self, files):
         codeowners_data = {}
-        if self.verbose > 0:
+        if self.verbose > 1:
             print(f"files: {files}")
         for file in files:
             if self.verbose > 2:
@@ -58,15 +59,24 @@ class CodeOwnersUpdater:
                 codeowners_data[file] = file_committers
         if self.verbose  > 1:
             print(f"codeowners data:\n{yaml.safe_dump(codeowners_data, indent=2)}")
+
+        # Update existing entries with new owners.
+        # This could transfer ownership? e.g. Who last touched the file?
         for key, value in self.original_codeowner_data.items():
             self.updated_codeowner_data[key] = codeowners_data.get(key, value)
+
+        splat = self.updated_codeowner_data.get("*", [])
+        # Only keep entries that are NOT in the splat set.
         for key, value in codeowners_data.items():
-            if value != self.updated_codeowner_data.get("*", None):
+            if not set(value) & set(splat):
                 self.updated_codeowner_data[key] = value
+
+        # Create a new data set by taking the updated codeowner data and only keeping the entries that had a key of
+        # "*" or had a value that was in the splat set.
         self.optimized_codeowner_data = {
             key: value
             for key, value in self.updated_codeowner_data.items()
-            if (key == "*" or value != self.updated_codeowner_data.get("*", None))
+            if (key == "*" or (not set(value) & set(splat)))
         }
 
         if self.verbose > 1:
@@ -148,7 +158,7 @@ class CodeOwnersUpdater:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("filenames", nargs="+")
+    parser.add_argument("filenames", nargs="*")
     parser.add_argument("--ownership_threshold")
     parser.add_argument("--codeowners_filename")
     parser.add_argument("--verbose", "-v", action="count", default=0)
@@ -160,13 +170,13 @@ def main():
     verbose = int(args.verbose)
 
     if len(files) == 0:
-        parser.error("No filenames provided")
+        print("No filenames provided", file=sys.stderr)
+        files = git.get_all_files()
     try:
         owners_raw = pathlib.Path(".gitownrc").read_text("utf-8")
         owners = json.loads(owners_raw)
     except FileNotFoundError as e:
         message = "A .gitownrc file is required. Please see the github repo for details"
-        raise Exception(message).with_traceback(e.__traceback__)
         raise Exception(message).with_traceback(e.__traceback__)
 
     codeowners = CodeOwnersUpdater(
